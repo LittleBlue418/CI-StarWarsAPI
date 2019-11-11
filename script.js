@@ -11,7 +11,7 @@ function getData(type, cb) {
 
   //Opening a connection, use the 'get' method to retrieve the data
   //Url is the data that we want to retrieve
-  xhr.open("GET", baseURL + type);
+  xhr.open("GET", baseURL + type + "/");
 
   //The send method sends the request to the swapi api
   xhr.send();
