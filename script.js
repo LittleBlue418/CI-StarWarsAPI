@@ -1,6 +1,9 @@
+//Taking the URL out of the function into a global constant
+const baseURL = "https://swapi.co/api/"
+
 //Wrapping all of the getting data code in a fucntion
 //we will use cb as our call back function
-function getData(cb) {
+function getData(type, cb) {
   //Inbuilt object that JavaScript provides to allow us to consume APIs
   //Method to open connections, send and close them
   //Creating a new instance of this object
@@ -8,7 +11,7 @@ function getData(cb) {
 
   //Opening a connection, use the 'get' method to retrieve the data
   //Url is the data that we want to retrieve
-  xhr.open("GET", "https://swapi.co/api/");
+  xhr.open("GET", baseURL + type);
 
   //The send method sends the request to the swapi api
   xhr.send();
@@ -30,12 +33,10 @@ function getData(cb) {
   };
 }
 
-//seporating out the callback function
-function printDataToConsole(data) {
-  console.log(data)
+function writeToDocument(type) {
+  getData(type, function(data) {
+    document.getElementById("data").innerHTML = data;
+  });
 }
-
-//calling our function with a callback function as the parametor
-getData(printDataToConsole);
 
 
