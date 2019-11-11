@@ -34,9 +34,16 @@ function getData(type, cb) {
 }
 
 function writeToDocument(type) {
-  getData(type, function(data) {
+  getData(type, function (data) {
+    //breaking out for clean code
+    data = data.results;
+    //runs for each object in the list
+    data.forEach(function (item) {
+      //item.name gives the name field for each, and the += avoids overwriting
+      document.getElementById("data").innerHTML += item.name;
+    })
     console.dir(data)
-    document.getElementById("data").innerHTML = data.results;
+
   });
 }
 
