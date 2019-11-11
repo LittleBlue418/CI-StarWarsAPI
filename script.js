@@ -20,7 +20,7 @@ function setData(jsonData) {
 
 //Whenever the state changes on our Xhr object we run a check
 //This happens five times
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
 
   //xhr state 4 is done, loaded and ready.
   //200 is a http code meaning request suceeded, content delivered
@@ -33,5 +33,9 @@ xhr.onreadystatechange = function() {
     setData(JSON.parse(this.responseText));
   }
 };
+
+setTimeout(function () {
+  console.log(data);
+}, 900);
 
 
