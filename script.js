@@ -13,11 +13,6 @@ xhr.open("GET", "https://swapi.co/api/");
 //The send method sends the request to the swapi api
 xhr.send();
 
-//Setting the data variable outside of the on ready state change function
-function setData(jsonData) {
-  data = jsonData;
-}
-
 //Whenever the state changes on our Xhr object we run a check
 //This happens five times
 xhr.onreadystatechange = function () {
@@ -29,13 +24,13 @@ xhr.onreadystatechange = function () {
     //we find our div, target the inner html, set it to contain the response text
     document.getElementById("data").innerHTML = this.responseText;
 
-    //Sending through a JSON parsed object into our setData function.
-    setData(JSON.parse(this.responseText));
+    //Setting the data variable to the parsed JSON object.
+    data = JSON.parse(this.responseText);
   }
 };
 
 setTimeout(function () {
   console.log(data);
-}, 900);
+}, 700);
 
 
