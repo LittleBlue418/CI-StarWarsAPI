@@ -34,16 +34,19 @@ function getData(type, cb) {
 }
 
 function writeToDocument(type) {
+  //creating a variable to hold the page element
+  var el = document.getElementById("data");
+  //On each click, clearing the element first
+  el.innerHTML = "";
+  //Running out Get Data function with a callback once it's done
   getData(type, function (data) {
-    //breaking out for clean code
+    //moving the data.results into a variable data
     data = data.results;
     //runs for each object in the list
     data.forEach(function (item) {
       //item.name gives the name field for each, and the += avoids overwriting
-      document.getElementById("data").innerHTML += item.name;
+      el.innerHTML += "<p>" + item.name + "</p>";
     })
-    console.dir(data)
-
   });
 }
 
