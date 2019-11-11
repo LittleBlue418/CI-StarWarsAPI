@@ -24,9 +24,6 @@ function getData(type, cb) {
     //200 is a http code meaning request suceeded, content delivered
     if (this.readyState == 4 && this.status == 200) {
 
-      //we find our div, target the inner html, set it to contain the response text
-      document.getElementById("data").innerHTML = this.responseText;
-
       //invoking the call back function.
       cb(JSON.parse(this.responseText));
     }
