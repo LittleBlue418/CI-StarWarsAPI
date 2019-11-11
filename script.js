@@ -4,6 +4,7 @@ const baseURL = "https://swapi.co/api/"
 //Wrapping all of the getting data code in a fucntion
 //we will use cb as our call back function
 function getData(type, cb) {
+
   //Inbuilt object that JavaScript provides to allow us to consume APIs
   //Method to open connections, send and close them
   //Creating a new instance of this object
@@ -32,10 +33,13 @@ function getData(type, cb) {
 
 //Putting out objects into tables
 function getTableHeaders(obj) {
+
   //variable for the table headders
   var tableHeaders = [];
+
   //Itterating through each object
   Object.keys(obj).forEach(function (key) {
+
     //Pushing each key into a table cell
     tableHeaders.push(`<td>${key}</td>`)
   })
@@ -45,12 +49,17 @@ function getTableHeaders(obj) {
 }
 
 function writeToDocument(type) {
+  var tableRows = [];
+
   //creating a variable to hold the page element
   var el = document.getElementById("data");
+
   //On each click, clearing the element first
   el.innerHTML = "";
+
   //Running out Get Data function with a callback once it's done
   getData(type, function (data) {
+
     //moving the data.results into a variable data
     data = data.results;
 
@@ -59,13 +68,18 @@ function writeToDocument(type) {
 
     //runs for each object in the list
     data.forEach(function (item) {
-      //item.name gives the name field for each, and the += avoids overwriting
-      //el.innerHTML += "<p>" + item.name + "</p>";
+
+      var dataRow = [];
+
+      Object.keys(item).forEach(function(key) {
+        dataRow.push(`<td>${item[key]}</td>`);
+      })
+      tableRows.push(dataRow);
     })
 
     //to test - setting the inner html to the results we got from the
     //table headers
-    el.innerHTML = `<table>${tableHeaders}</table>`
+    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`
   });
 }
 
