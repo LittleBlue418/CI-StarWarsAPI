@@ -30,11 +30,12 @@ function getData(cb) {
   };
 }
 
-//Calling our get data function with an anonomous function as a parametor
-getData(function(data) {
-  //the 'data' here is the 'cb' from our getData function above
-  //It will return the parsed JSON response text
+//seporating out the callback function
+function printDataToConsole(data) {
   console.log(data)
-});
+}
+
+//calling our function with a callback function as the parametor
+getData(printDataToConsole);
 
 
