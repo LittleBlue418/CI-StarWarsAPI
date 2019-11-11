@@ -30,6 +30,20 @@ function getData(type, cb) {
   };
 }
 
+//Putting out objects into tables
+function getTableHeaders(obj) {
+  //variable for the table headders
+  var tableHeaders = [];
+  //Itterating through each object
+  Object.keys(obj).forEach(function (key) {
+    //Pushing each key into a table cell
+    tableHeaders.push(`<td>${key}</td>`)
+  })
+
+  //returing the formatted table header in a table row
+  return `<tr>${tableHeaders}</tr>`;
+}
+
 function writeToDocument(type) {
   //creating a variable to hold the page element
   var el = document.getElementById("data");
@@ -39,11 +53,19 @@ function writeToDocument(type) {
   getData(type, function (data) {
     //moving the data.results into a variable data
     data = data.results;
+
+    //creating a variable for table headers and running the function
+    var tableHeaders = getTableHeaders(data[0]);
+
     //runs for each object in the list
     data.forEach(function (item) {
       //item.name gives the name field for each, and the += avoids overwriting
-      el.innerHTML += "<p>" + item.name + "</p>";
+      //el.innerHTML += "<p>" + item.name + "</p>";
     })
+
+    //to test - setting the inner html to the results we got from the
+    //table headers
+    el.innerHTML = `<table>${tableHeaders}</table>`
   });
 }
 
