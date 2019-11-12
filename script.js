@@ -1,9 +1,7 @@
-//Taking the URL out of the function into a global constant
-const baseURL = "https://swapi.co/api/"
 
 //Wrapping all of the getting data code in a fucntion
 //we will use cb as our call back function
-function getData(type, cb) {
+function getData(url, cb) {
 
   //Inbuilt object that JavaScript provides to allow us to consume APIs
   //Method to open connections, send and close them
@@ -12,7 +10,7 @@ function getData(type, cb) {
 
   //Opening a connection, use the 'get' method to retrieve the data
   //Url is the data that we want to retrieve
-  xhr.open("GET", baseURL + type + "/");
+  xhr.open("GET", url);
 
   //The send method sends the request to the swapi api
   xhr.send();
@@ -60,7 +58,7 @@ function generatePaginationButtons(next, prev) {
   }
 }
 
-function writeToDocument(type) {
+function writeToDocument(url) {
   //House each row of data
   var tableRows = [];
 
@@ -71,7 +69,7 @@ function writeToDocument(type) {
   el.innerHTML = "";
 
   //Running out Get Data function with a callback once it's done
-  getData(type, function (data) {
+  getData(url, function (data) {
 
     //The variable to store the pagination function output
     var pagination;
