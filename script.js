@@ -49,6 +49,7 @@ function getTableHeaders(obj) {
 }
 
 function writeToDocument(type) {
+  //House each row of data
   var tableRows = [];
 
   //creating a variable to hold the page element
@@ -69,16 +70,26 @@ function writeToDocument(type) {
     //runs for each object in the list
     data.forEach(function (item) {
 
+      //An empty array for each individual row.
+      //things that will be in that row
       var dataRow = [];
 
+      // Creating an individual row array
+      //Itterating over our keys again, using the same method as before
       Object.keys(item).forEach(function(key) {
+
+        // we are pushing each element onto our data row
+        // <td> created a new table cell for each item
+        // item[key] gives the data that's in each key. the value
         dataRow.push(`<td>${item[key]}</td>`);
       })
-      tableRows.push(dataRow);
+
+      // Pushing the data row array into our table row array
+      tableRows.push(`<tr>${dataRow}</tr>`);
     })
 
-    //to test - setting the inner html to the results we got from the
-    //table headers
+    //setting the inner html to the results we got from the
+    //table headers and the table rows
     el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`
   });
 }
