@@ -48,6 +48,18 @@ function getTableHeaders(obj) {
   return `<tr>${tableHeaders}</tr>`;
 }
 
+//Function to generate next and previous buttons if we have more than 10 results
+function generatePaginationButtons(next, prev) {
+  if (next && prev) {
+    return `<button onclick="writeToDocument('${prev}')">Previous</button>
+            <button onclick="writeToDocument('${next}')">Next</button>`;
+  } else if (next && !prev) {
+    return `<button onclick="writeToDocument('${next}')">Next</button>`;
+  } else if (!next && prev) {
+    return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
+  }
+}
+
 function writeToDocument(type) {
   //House each row of data
   var tableRows = [];
@@ -60,6 +72,16 @@ function writeToDocument(type) {
 
   //Running out Get Data function with a callback once it's done
   getData(type, function (data) {
+
+    //The variable to store the pagination function output
+    var pagination;
+
+    //logic to determine whether we run the function
+    if (data.next || data.previous) {
+
+      // if we run the function, set variable equal to function with these inputs
+      pagination = generatePaginationButtons(data.next, data.previous)
+    }
 
     //moving the data.results into a variable data
     data = data.results;
@@ -96,7 +118,7 @@ function writeToDocument(type) {
 
     //setting the inner html to the results we got from the
     //table headers and the table rows
-    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>`
+    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`;
   });
 }
 
