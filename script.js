@@ -78,10 +78,16 @@ function writeToDocument(type) {
       //Itterating over our keys again, using the same method as before
       Object.keys(item).forEach(function(key) {
 
-        // we are pushing each element onto our data row
+        //Set to the value of the key
+        var rowData = item[key].toString();
+
+        //Takes the first 15 charactors from our row data
+        var truncatedData = rowData.substring(0, 15)
+
+        // we are pushing each truncated element onto our data row
         // <td> created a new table cell for each item
         // item[key] gives the data that's in each key. the value
-        dataRow.push(`<td>${item[key]}</td>`);
+        dataRow.push(`<td>${truncatedData}</td>`);
       })
 
       // Pushing the data row array into our table row array
