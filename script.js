@@ -116,7 +116,7 @@ function writeToDocument(url) {
 
     //setting the inner html to the results we got from the
     //table headers and the table rows
-    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`;
+    el.innerHTML = `<table>${tableHeaders}${tableRows}</table>${pagination}`.replace(/,/g, "");
   });
 }
 
